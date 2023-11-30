@@ -1,0 +1,78 @@
+
+<!--
+    js-eval-tool.html
+-->
+<meta charset="utf-8">
+
+<html>
+<script>
+
+
+function eval_input(){
+    eval( document.getElementById('input_area').value );
+    //document.getElementById('debug_out').value += "clicked!\n";
+}
+
+function eval_print_input(){
+    result = eval( document.getElementById('input_area').value );
+    debug_println(result);
+}
+
+function example_1(){
+    let scr_area = document.getElementById('input_area');
+    scr_area.value = '// click "print it" button\n';
+    scr_area.value += 'now = new Date()\n';
+    scr_area.value += '"Current date/time is " + now;';
+}
+
+function example_2(){
+    let scr_area = document.getElementById('input_area');
+    scr_area.value = '// click "do it" button\n';
+    scr_area.value += 'n = 1;\n';
+    scr_area.value += 'for (j=0; j<10; j++){\n';
+    scr_area.value += '  debug_println(n + ": hello,world!");\n';
+    scr_area.value += '  n += 1;\n';
+    scr_area.value += '}\n';
+}
+
+// ----- debug print
+function debug_println(str){    debug_print(str + "\n");  }
+
+function debug_print(str){
+  document.getElementById("debug_out").value += str; 
+}
+
+function clear_debug_button(){
+//  document.getElementById("debug_out").textContent = '';
+  document.getElementById("debug_out").value = '';
+}
+</script>
+
+
+<body>
+javascript evaluation tool<br>
+<p></p>
+<table border="1" width="500px">
+    <tr>
+    <td>input:</td>
+    <td align="right">
+        <input type="button" value="example 1" onclick="example_1()">
+        <input type="button" value="example 2" onclick="example_2()">
+    </td>
+    </tr>
+    <tr><td colspan="2">
+        <TEXTAREA id="input_area" cols="120" rows="7">debug_print(3 + 4);
+        </TEXTAREA> 
+    </td></tr>
+    <tr><td colspan="2">
+    <input type="button" value=" do it " onclick="eval_input()">
+    <input type="button" value="print it" onclick="eval_print_input()">
+    <input type="button" value="Clear" onclick="clear_debug_button()">
+    </td></tr>
+    <tr><td colspan="2">result:<br></td></tr>
+    <tr><Td colspan="2">
+        <TEXTAREA id="debug_out" cols="120" rows="16"></TEXTAREA> <br>
+    </Td></tr>
+</table>
+</body>
+</html>
